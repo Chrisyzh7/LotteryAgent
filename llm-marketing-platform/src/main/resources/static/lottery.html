@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 抽奖活动</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/lottery.css?v=20260406-2">
+</head>
+<body>
+<div class="background-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+<div class="container">
+    <header class="glass-header">
+        <div>
+            <h1 id="activityTitle">加载中...</h1>
+            <div class="cuser-info" id="cUserInfo">未登录C端用户</div>
+            <div class="cuser-actions">
+                <button id="switchUserBtn" type="button">切换账号</button>
+                <button id="logoutUserBtn" type="button">退出</button>
+            </div>
+        </div>
+        <div class="points-badge">🪙 <span id="userPoints">0.00</span> 积分</div>
+    </header>
+
+    <main>
+        <div class="lottery-grid">
+            <div class="prize-cell" id="cell-0"></div>
+            <div class="prize-cell" id="cell-1"></div>
+            <div class="prize-cell" id="cell-2"></div>
+            <div class="prize-cell" id="cell-7"></div>
+
+            <button class="draw-btn" id="drawBtn">抽奖<br><small id="deductPoints"></small></button>
+
+            <div class="prize-cell" id="cell-3"></div>
+            <div class="prize-cell" id="cell-6"></div>
+            <div class="prize-cell" id="cell-5"></div>
+            <div class="prize-cell" id="cell-4"></div>
+        </div>
+
+        <section class="reward-panel">
+            <h3>我的中奖记录</h3>
+            <div id="rewardList" class="reward-list">暂无记录</div>
+        </section>
+    </main>
+</div>
+
+<div class="modal" id="cUserModal" style="display:none;">
+    <div class="modal-content cuser-modal-content">
+        <h2>欢迎参与抽奖</h2>
+        <p class="cuser-tip">使用用户名+密码登录，手机号仅用于后续发奖联系（不做验证码校验）。</p>
+        <div id="cUserError" class="cuser-error" style="display:none;"></div>
+        <input id="cUserUsername" class="cuser-input" placeholder="用户名（必填）">
+        <input id="cUserPassword" class="cuser-input" type="password" placeholder="密码（必填）">
+        <input id="cUserNickname" class="cuser-input" placeholder="昵称（可选）">
+        <input id="cUserMobile" class="cuser-input" placeholder="手机号（首次注册必填）">
+        <button class="close-btn" id="cUserLoginBtn">登录/注册并进入活动</button>
+    </div>
+</div>
+
+<div class="modal glass-modal" id="resultModal" style="display:none;">
+    <div class="modal-content">
+        <h2>🎉 恭喜您 🎉</h2>
+        <div class="prize-icon" id="resultIcon">🎁</div>
+        <p id="resultText">获得奖品</p>
+        <button class="close-btn" onclick="closeModal()">收下奖励</button>
+    </div>
+</div>
+
+<div id="pageToast" class="page-toast"></div>
+
+<script src="./js/lottery.js?v=20260406-2"></script>
+</body>
+</html>

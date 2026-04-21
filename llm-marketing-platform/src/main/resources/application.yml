@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: llm-marketing-platform
+
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/llm_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456  # 修改成你的 MySQL 密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Redis 配置
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:16379}
+
+server:
+  port: 8091  # 服务启动端口
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml   # 指定 Mapper XML 文件位置
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名映射 Java 字段
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  # 开发期打印 SQL，上线后可删
+  global-config:
+    db-config:
+      id-type: auto # 自增主键
+
+# 多大模型 API 动态分发配置
+llm:
+  providers:
+    # 1. DeepSeek 官方通道
+    deepseek:
+      api-key: sk-faec13d9f9254e51bc26f34efedb9a2e
+      base-url: https://api.deepseek.com/v1/chat/completions
+      model: deepseek-chat
+    # 2. 阿里云通义千问 (兼容 OpenAI 格式)
+    qwen:
+      api-key: sk-86bc247246da4d4d81feffa53e944870
+      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+      model: qwen-plus
+    # 3. 智谱 AI (GLM-4) (兼容 OpenAI 格式)
+    zhipu:
+      api-key: 577d2af7593c435f9c6014ee7512c5aa.vgOKecQjZw3ds5kG
+      base-url: https://open.bigmodel.cn/api/paas/v4/chat/completions
+      model: glm-4
+    # 4. 火山引擎豆包 (Doubao) (兼容 OpenAI 格式)
+    doubao:
+      api-key: 805be2d8-35fb-4b48-b918-d8a8d637b261
+      base-url: https://ark.cn-beijing.volces.com/api/v3/chat/completions
+      model: doubao-seed-2-0-pro-260215
+
+lottery:
+  auto-preheat-on-startup: false

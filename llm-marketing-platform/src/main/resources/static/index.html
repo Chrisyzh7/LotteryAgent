@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智能对话</title>
+    <link rel="stylesheet" href="css/style.css?v=20260407-1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/styles/github.min.css">
+</head>
+<body>
+    <div id="auth-modal" class="modal-overlay">
+        <div class="modal-box glass-effect">
+            <h2 id="auth-title">欢迎登录</h2>
+            <p class="auth-subtitle">开启你的 AI 智能之旅</p>
+
+            <div class="input-group">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="username" placeholder="请输入用户名(唯一账号)" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="请输入密码">
+            </div>
+
+            <button id="btn-login" class="btn primary-btn">登录</button>
+            <button id="btn-register" class="btn secondary-btn">注册新账号</button>
+            <div id="auth-error" class="error-msg"></div>
+        </div>
+    </div>
+
+    <div id="app-container" class="layout-container" style="display: none;">
+        <aside class="sidebar glass-effect">
+            <div class="brand">
+                <div class="logo">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <h3>AI Chat</h3>
+            </div>
+
+            <div class="assistant-switcher">
+                <div class="assistant-label"><i class="fa-solid fa-sliders"></i> 助手模式</div>
+                <select id="assistant-select" class="assistant-select">
+                    <option value="general">通用助手</option>
+                    <option value="lottery_agent">抽奖智能体</option>
+                </select>
+            </div>
+
+            <button class="new-chat-btn" onclick="startNewChat()">
+                <i class="fa-solid fa-plus"></i> 新的对话
+            </button>
+            <div class="merchant-tools">
+                <a class="reward-center-link" href="/reward-center.html?view=activities" target="_blank">
+                    <i class="fa-solid fa-table-list"></i> 当前活动列表
+                </a>
+                <a class="reward-center-link" href="/reward-center.html?view=rewards" target="_blank">
+                    <i class="fa-solid fa-list-check"></i> 发奖管理台
+                </a>
+            </div>
+
+            <div class="history-list" id="sidebar-history-list"></div>
+
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="info">
+                    <div class="name" id="display-username">未登录</div>
+                    <div class="status">在线</div>
+                </div>
+                <button class="logout-btn" onclick="logout()" title="退出登录">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bubble">你好，今天我可以为你做什么？</div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <div class="input-toolbar">
+                        <i class="fa-solid fa-microchip"></i>
+                        <select id="model-select" class="bottom-model-select">
+                            <option value="deepseek">DeepSeek Chat</option>
+                            <option value="qwen">通义千问 Qwen</option>
+                            <option value="zhipu">智谱 GLM-4</option>
+                            <option value="doubao">豆包 Doubao</option>
+                        </select>
+                        <div id="lottery-style-wrap" class="lottery-style-wrap" style="display:none;">
+                            <span>风格</span>
+                            <select id="lottery-style-select" class="bottom-model-select">
+                                <option value="dark_neon">暗夜绚丽</option>
+                                <option value="ins_minimal">简约 INS</option>
+                                <option value="fresh_light">轻松纯净</option>
+                            </select>
+                        </div>
+                    </div>
+                    <textarea id="chat-input" placeholder="输入你想了解的内容，Shift + Enter 换行..."></textarea>
+                    <button class="send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+                <div class="footer-tip">AI 可能会产生误导性信息，请核实重要内容。</div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/highlight.min.js"></script>
+    <script src="js/main.js?v=20260407-3"></script>
+</body>
+</html>

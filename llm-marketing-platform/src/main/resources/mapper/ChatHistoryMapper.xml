@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzh.mapper.ChatHistoryMapper">
+
+    <!-- 结果映射：数据库列 → Java 字段 -->
+    <resultMap id="BaseResultMap" type="com.yzh.model.entity.ChatHistory">
+        <id     column="id"           property="id"/>
+        <result column="user_id"      property="userId"/>
+        <result column="session_id"   property="sessionId"/>
+        <result column="model_key"    property="modelKey"/>
+        <result column="message_role" property="messageRole"/>
+        <result column="content"      property="content"/>
+        <result column="create_time"  property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询列 -->
+    <sql id="Base_Column_List">
+        id, user_id, session_id, model_key, message_role, content, create_time
+    </sql>
+
+    <!--
+        按 sessionId 查询最近 N 条对话记录（时间正序，用于构造上下文）
+        用途：RAG 检索 + 普通上下文拼装
+    -->
+    <select id="selectRecentBySessionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM chat_history
+        WHERE session_id = #{sessionId}
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <!--
+        按 userId 查询某用户在指定模型下的最近 N 条对话（无 sessionId 场景降级使用）
+    -->
+    <select id="selectRecentByUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM chat_history
+        WHERE user_id = #{userId}
+          AND model_key = #{modelKey}
+        ORDER BY create_time DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 按 sessionId 查询全部对话记录（用于 RAG 向量化存储时的批量读取） -->
+    <select id="selectAllBySessionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM chat_history
+        WHERE session_id = #{sessionId}
+        ORDER BY create_time ASC
+    </select>
+
+    <!-- 
+        查询用户的全部会话列表，用于侧边栏展示
+        标题取该会话下的第一条用户提问内容
+    -->
+    <select id="selectSessionList" resultType="com.yzh.model.vo.HistorySessionVO">
+        SELECT
+            session_id AS sessionId,
+            MAX(create_time) AS updateTime,
+            (SELECT content FROM chat_history ch2
+             WHERE ch2.session_id = ch1.session_id
+               AND ch2.message_role = 'user'
+             ORDER BY create_time ASC LIMIT 1) AS title
+        FROM chat_history ch1
+        WHERE user_id = #{userId}
+        GROUP BY session_id
+        ORDER BY updateTime DESC
+    </select>
+
+</mapper>

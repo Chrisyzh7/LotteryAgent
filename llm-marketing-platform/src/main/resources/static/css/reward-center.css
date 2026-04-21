@@ -1,0 +1,333 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at 20% 0%, #e8f2ff 0%, #f7fafc 45%, #edf2f7 100%);
+    color: #0f172a;
+}
+
+.page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 24px 20px 40px;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+
+.top h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.top p {
+    color: #475569;
+}
+
+.merchant-info {
+    margin-top: 6px;
+    color: #1e3a8a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.back-link {
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    background: #111827;
+    color: #fff;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid #dbe3ef;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    padding: 16px;
+    margin-bottom: 14px;
+}
+
+.panel-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.tab-panel {
+    display: inline-flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.tab-btn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+    border-color: transparent;
+    color: #fff;
+}
+
+.reconcile-output {
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+    padding: 12px;
+    min-height: 58px;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.filter-panel {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+select,
+input {
+    min-width: 220px;
+    height: 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0 12px;
+    outline: none;
+    background: #fff;
+}
+
+select:focus,
+input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.btn {
+    border: none;
+    border-radius: 10px;
+    background: #1f2937;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    height: 40px;
+    padding: 0 14px;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+}
+
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #dbe3ef;
+    border-radius: 14px;
+    padding: 12px 14px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #475569;
+}
+
+.stat-value {
+    margin-top: 6px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.stat-value.ok { color: #15803d; }
+.stat-value.warn { color: #b45309; }
+.stat-value.bad { color: #b91c1c; }
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 11px 8px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+th {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.empty {
+    text-align: center;
+    color: #64748b;
+}
+
+.tag {
+    border-radius: 999px;
+    font-size: 12px;
+    padding: 4px 10px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.tag.pending { background: #ffedd5; color: #c2410c; }
+.tag.done { background: #dcfce7; color: #15803d; }
+.tag.failed { background: #fee2e2; color: #b91c1c; }
+.tag.online { background: #dcfce7; color: #166534; }
+.tag.offline { background: #e2e8f0; color: #334155; }
+
+.op-wrap {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.mini-btn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 999px;
+    font-size: 12px;
+    padding: 4px 10px;
+    cursor: pointer;
+    color: #1f2937;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mini-btn.success { border-color: #86efac; color: #166534; background: #f0fdf4; }
+.mini-btn.fail { border-color: #fecaca; color: #991b1b; background: #fef2f2; }
+.mini-btn.info { border-color: #bfdbfe; color: #1e40af; background: #eff6ff; }
+.mini-btn.manage { border-color: #d8b4fe; color: #6b21a8; background: #faf5ff; }
+.mini-btn.publish { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; }
+.mini-btn.stop { border-color: #fca5a5; color: #b91c1c; background: #fef2f2; }
+
+.mini-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.grant-grid {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.checkbox-line {
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.checkbox-line input {
+    min-width: auto;
+    width: 16px;
+    height: 16px;
+}
+
+.toast {
+    position: fixed;
+    right: 18px;
+    top: 18px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: #fff;
+    background: #1f2937;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.ok { background: #166534; }
+.toast.err { background: #b91c1c; }
+
+#rewardsPanel {
+    display: none;
+}
+
+@media (max-width: 980px) {
+    .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .top {
+        flex-direction: column;
+    }
+
+    .back-link {
+        width: 100%;
+        text-align: center;
+    }
+}

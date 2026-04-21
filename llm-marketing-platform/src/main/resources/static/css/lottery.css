@@ -1,0 +1,549 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background-color: #0f172a;
+    color: #f8fafc;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body.theme-ins {
+    background-color: #faf8f6;
+    color: #2f2a27;
+}
+
+body.theme-fresh {
+    background-color: #eefaf4;
+    color: #113322;
+}
+
+.background-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.6;
+    animation: float 25s infinite alternate ease-in-out;
+}
+
+.orb1 {
+    width: 500px;
+    height: 500px;
+    background: #3b82f6;
+    top: -100px;
+    left: -100px;
+}
+
+.orb2 {
+    width: 600px;
+    height: 600px;
+    background: #8b5cf6;
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+.orb3 {
+    width: 400px;
+    height: 400px;
+    background: #ec4899;
+    top: 30%;
+    left: 40%;
+    animation-delay: -10s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(150px, 80px) scale(1.1); }
+}
+
+.container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 22px 18px 34px;
+}
+
+.glass-header {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    margin-bottom: 28px;
+}
+
+.glass-header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.cuser-info {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.cuser-actions {
+    margin-top: 10px;
+    display: inline-flex;
+    gap: 8px;
+}
+
+.cuser-actions button {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(15, 23, 42, 0.35);
+    color: #e2e8f0;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cuser-actions button:hover {
+    border-color: rgba(99, 102, 241, 0.55);
+    background: rgba(59, 130, 246, 0.2);
+}
+
+.points-badge {
+    background: rgba(139, 92, 246, 0.15);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ddd6fe;
+    white-space: nowrap;
+}
+
+.lottery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(92px, 1fr));
+    grid-template-rows: repeat(3, minmax(92px, 1fr));
+    gap: 14px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 18px;
+    border-radius: 26px;
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.prize-cell {
+    min-height: 92px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #cbd5e1;
+    transition: all 0.2s ease;
+}
+
+.prize-cell .icon {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.prize-cell.active {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    box-shadow: 0 0 24px rgba(236, 72, 153, 0.7);
+    transform: scale(1.06);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: #fff;
+    z-index: 2;
+}
+
+.draw-btn {
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    color: #fff;
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.draw-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.draw-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.draw-btn small {
+    display: inline-block;
+    margin-top: 2px;
+    font-size: 14px;
+    opacity: 0.86;
+}
+
+.draw-btn.insufficient {
+    animation: draw-shake 0.36s ease;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.55), 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+
+@keyframes draw-shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+}
+
+.page-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 180px;
+    max-width: min(92vw, 460px);
+    text-align: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: rgba(127, 29, 29, 0.9);
+    border: 1px solid rgba(248, 113, 113, 0.45);
+    color: #fee2e2;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 210;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.page-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.reward-panel {
+    margin-top: 22px;
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.reward-panel h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.reward-list {
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reward-item {
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 16px;
+}
+
+.modal-content {
+    background: rgba(30, 41, 59, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 30px 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    color: #f8fafc;
+}
+
+.glass-modal .modal-content {
+    max-width: 360px;
+}
+
+.modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #f8fafc;
+}
+
+.cuser-tip {
+    margin-bottom: 12px;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.cuser-error {
+    margin: 0 auto 10px;
+    max-width: 92%;
+    font-size: 13px;
+    color: #fecaca;
+    background: rgba(127, 29, 29, 0.35);
+    border: 1px solid rgba(248, 113, 113, 0.4);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.cuser-error.success {
+    color: #d1fae5;
+    background: rgba(6, 95, 70, 0.4);
+    border-color: rgba(52, 211, 153, 0.5);
+}
+
+.cuser-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    outline: none;
+}
+
+.cuser-modal-content {
+    background: rgba(17, 24, 39, 0.95) !important;
+    color: #e5e7eb !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.cuser-modal-content h2 {
+    color: #f9fafb !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.cuser-modal-content .cuser-tip {
+    color: #e5e7eb !important;
+}
+
+.cuser-modal-content .cuser-input {
+    color: #e5e7eb !important;
+    background: rgba(31, 41, 55, 0.95) !important;
+    border: 1px solid rgba(148, 163, 184, 0.35) !important;
+}
+
+.cuser-modal-content .cuser-input::placeholder {
+    color: #9ca3af;
+}
+
+.prize-icon {
+    font-size: 64px;
+    margin: 16px 0;
+}
+
+.close-btn {
+    margin-top: 14px;
+    padding: 12px 28px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+    color: #0f172a;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+body.theme-ins .glass-header,
+body.theme-ins .lottery-grid,
+body.theme-ins .reward-panel {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+body.theme-ins .modal-content {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #111827;
+}
+
+body.theme-ins .modal-content h2 {
+    color: #111827;
+}
+
+body.theme-ins .cuser-tip {
+    color: #4b5563;
+}
+
+body.theme-ins .cuser-input {
+    background: #ffffff;
+    color: #111827;
+    border: 1px solid #d1d5db;
+}
+
+body.theme-ins .prize-cell {
+    background: rgba(245, 242, 238, 0.94);
+    color: #3b2f2f;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-ins .draw-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+}
+
+body.theme-ins .points-badge {
+    color: #7c2d12;
+    border-color: rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.12);
+}
+
+body.theme-ins .cuser-info {
+    color: #6b7280;
+}
+
+body.theme-ins .cuser-actions button {
+    background: rgba(255, 255, 255, 0.95);
+    color: #374151;
+    border-color: rgba(107, 114, 128, 0.35);
+}
+
+body.theme-ins .cuser-actions button:hover {
+    border-color: rgba(147, 51, 234, 0.35);
+    background: rgba(237, 233, 254, 0.8);
+}
+
+body.theme-fresh .glass-header,
+body.theme-fresh .lottery-grid,
+body.theme-fresh .reward-panel {
+    background: rgba(255, 255, 255, 0.82);
+    border-color: rgba(6, 95, 70, 0.12);
+}
+
+body.theme-fresh .modal-content {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(6, 95, 70, 0.16);
+    color: #064e3b;
+}
+
+body.theme-fresh .modal-content h2 {
+    color: #064e3b;
+}
+
+body.theme-fresh .cuser-tip {
+    color: #065f46;
+}
+
+body.theme-fresh .cuser-input {
+    background: rgba(255, 255, 255, 0.96);
+    color: #14532d;
+    border: 1px solid rgba(6, 95, 70, 0.22);
+}
+
+body.theme-fresh .prize-cell {
+    background: rgba(236, 253, 245, 0.9);
+    color: #14532d;
+    border-color: rgba(6, 95, 70, 0.1);
+}
+
+body.theme-fresh .draw-btn {
+    background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
+
+body.theme-fresh .points-badge {
+    color: #065f46;
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+body.theme-fresh .cuser-info {
+    color: #047857;
+}
+
+body.theme-fresh .cuser-actions button {
+    background: rgba(255, 255, 255, 0.9);
+    color: #065f46;
+    border-color: rgba(6, 95, 70, 0.25);
+}
+
+body.theme-fresh .cuser-actions button:hover {
+    border-color: rgba(5, 150, 105, 0.45);
+    background: rgba(209, 250, 229, 0.75);
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 14px 12px 22px;
+    }
+
+    .glass-header {
+        padding: 16px;
+        margin-top: 10px;
+        margin-bottom: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .glass-header h1 {
+        font-size: 20px;
+    }
+
+    .points-badge {
+        font-size: 14px;
+    }
+
+    .lottery-grid {
+        gap: 10px;
+        padding: 12px;
+        border-radius: 20px;
+    }
+
+    .prize-cell {
+        min-height: 84px;
+        font-size: 12px;
+    }
+
+    .prize-cell .icon {
+        font-size: 28px;
+    }
+
+    .draw-btn {
+        font-size: 26px;
+    }
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商家运营台</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/reward-center.css?v=20260406-2">
+</head>
+<body>
+<div class="page">
+    <header class="top">
+        <div>
+            <h1>商家运营台</h1>
+            <p>活动状态管理、库存对账、发奖记录与积分运营</p>
+            <div id="merchantInfo" class="merchant-info">当前登录商家：-</div>
+        </div>
+        <a class="back-link" href="/index.html">返回 AI 对话</a>
+    </header>
+
+    <section class="panel tab-panel">
+        <button id="tabActivities" class="tab-btn active"><i class="fa-solid fa-table-list"></i> 当前活动列表</button>
+        <button id="tabRewards" class="tab-btn"><i class="fa-solid fa-list-check"></i> 发奖管理</button>
+    </section>
+
+    <section id="activitiesPanel" class="panel">
+        <div class="panel-head">
+            <div class="panel-title">活动总览</div>
+            <button id="btnReloadActivities" class="btn">刷新活动</button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>活动</th>
+                    <th>状态</th>
+                    <th>库存</th>
+                    <th>中奖记录</th>
+                    <th>待发奖</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="activityBody">
+                <tr><td colspan="6" class="empty">暂无活动</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="reconcilePanel" class="panel">
+        <div class="panel-title">库存对账结果</div>
+        <div id="reconcileOutput" class="reconcile-output">请选择活动后点击“库存对账”</div>
+    </section>
+
+    <section id="rewardsPanel">
+        <section class="panel filter-panel">
+            <div class="field">
+                <label for="activitySelect">活动</label>
+                <select id="activitySelect"></select>
+            </div>
+            <button id="btnReload" class="btn">刷新记录</button>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-label">总记录</div>
+                <div class="stat-value" id="statTotal">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">待发放</div>
+                <div class="stat-value warn" id="statPending">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">已发放</div>
+                <div class="stat-value ok" id="statDone">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">发放失败</div>
+                <div class="stat-value bad" id="statFailed">0</div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-title">中奖记录</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>记录ID</th>
+                        <th>用户</th>
+                        <th>奖品</th>
+                        <th>状态</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="recordBody">
+                    <tr><td colspan="6" class="empty">暂无记录</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="panel-title">活动加积分</div>
+            <div class="grant-grid">
+                <div class="field">
+                    <label for="grantPoints">加积分数值</label>
+                    <input id="grantPoints" type="number" min="0.01" step="0.01" placeholder="例如 20">
+                </div>
+                <div class="field">
+                    <label for="grantMode">加分方式</label>
+                    <select id="grantMode">
+                        <option value="single">指定用户</option>
+                        <option value="all">活动全体用户</option>
+                    </select>
+                </div>
+                <div class="field" id="cUserField">
+                    <label for="grantCUserId">用户标识</label>
+                    <input id="grantCUserId" type="text" placeholder="用户名 / 手机号 / cUserId / 数字ID">
+                </div>
+                <label class="checkbox-line" id="futureWrap" style="display:none;">
+                    <input id="includeFutureUsers" type="checkbox" checked>
+                    同步给后续新进入用户
+                </label>
+                <button id="btnGrant" class="btn primary">执行加积分</button>
+            </div>
+        </section>
+    </section>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="./js/reward-center.js?v=20260407-1"></script>
+</body>
+</html>
